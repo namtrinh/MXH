@@ -236,14 +236,6 @@
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    var mess1Elements = document.querySelectorAll('.mess1');
-    mess1Elements.forEach(function (element) {
-        element.addEventListener('click', function () {
-            element.classList.toggle('active');
-        });
-    });
-});
 function myFunction() {
     var colRight = document.querySelector(".col_right");
     var info = document.getElementById("info");

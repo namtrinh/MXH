@@ -57,7 +57,8 @@ CREATE TABLE message(
   message_to int,
   FOREIGN KEY (message_to) REFERENCES user(user_id), 
   content varchar(4294967295),
-  timestamp varchar(100)
+  timestamp varchar(100),
+  read_status BOOLEAN DEFAULT FALSE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 INSERT INTO message(message_by,message_to,content) VALUES 
 (1,2,'hello'),
@@ -85,7 +86,8 @@ CREATE TABLE notification (
   FOREIGN KEY (post_id) REFERENCES posts(post_id),
   noti_to int,
   FOREIGN KEY (noti_to) REFERENCES user(user_id),
-  noti_time varchar(200)
+  noti_time varchar(200),
+  read_status BOOLEAN DEFAULT FALSE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE friendrequest(

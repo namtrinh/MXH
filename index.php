@@ -80,7 +80,10 @@ if(isset($_SESSION['user']))
                 include("dangnhap/pass.php");
                 break;
             case 14:
+                $showMenuTren = false;
+                $showMenuTrai = false;
                 $showMenuPhai = false;
+                $showMenuDuoi = false;
                 include("trangcanhan/chinhsuathongtin.php");
                 break;
             case 15:

@@ -110,13 +110,10 @@ if (isset($_POST['update_posts'])) {
 }
 </style>
         <form id="formEditPost" enctype="multipart/form-data" method="post" class="form">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" 
-                style="position:absolute;right:20px;top:20px;color:white">
-              <i class="fa-solid fa-xmark" style="scale:2"></i>
-            </button>
             <div class="modal-dialog" style="margin:5% 23%">
               <div class="modal-content" style=" width:115vh; height:80vh; border-radius:10px;border: 1px solid lightgray">
                 <div class="modal-header" style="padding:25px">
+                  <a type="button" onclick="window.history.back()" style="position:absolute;left:20px"> <i class="fa-solid fa-arrow-left"></i></a>
                   <h1 class="modal-title fs-5" id="exampleModalLabel"
                     style="position:absolute;left:42%;padding:10px;text-align:center;">Chỉnh sửa bài viết</h1>
                   <input type="submit" name="update_posts" value="Lưu"

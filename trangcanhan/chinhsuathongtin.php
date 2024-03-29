@@ -13,36 +13,25 @@ body {
   font-family: "Roboto", sans-serif;     
 }
 button {
-  font-family: 'Roboto', sans-serif;
-  text-transform: uppercase;
-  outline: 0;
   background: #6abfd0;
   width: 100%;
   border: 0;
   padding: 15px;
   color: #FFFFFF;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
+  margin: 30px 0 0 0 !important;
 }
 button:hover,button:active,button:focus {
   background: #538c97
 }
 .formngoai {
-  width: 800px;
-  height:600px;
-  z-index: 1;
+  width: 600px;
+  margin:50px auto;
   background: #FFFFFF;
-  max-width: 600px; 
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-25%, -50%);
-  padding: 45px;
+  padding: 45px 45px 20px 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   border-radius:2%;
+  position: relative;
 }
 .formInput {
   font-family: 'Roboto', sans-serif;
@@ -63,7 +52,7 @@ a {
 
 
 
-
+<a type="button" onclick="window.history.back()" style="position:absolute;left:20px"> <i class="fa-solid fa-arrow-left"></i> Quay lại</a>
 <div class="formngoai">
   <h3 style="margin:-20px 0 20px 0">Cập nhật thông tin cá nhân</h3>
   <form action="trangcanhan/ctrl_info.php" method="post">

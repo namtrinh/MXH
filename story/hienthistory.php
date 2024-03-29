@@ -3,7 +3,6 @@
           // Khởi tạo mảng để lưu trữ ID của các modal
           $modal_ids = array();
           while ($row_story = $result_story->fetch_assoc()) {
-
             $current_time = time();
             $post_time = strtotime($row_story["story_time"]);
             $time_diff = $current_time - $post_time;
@@ -17,17 +16,24 @@
               $time_description = floor($time_diff / 86400) . " ngày trước";
             }
 
-            if ($time_diff < 24 * 60 * 60) { //tính theo giây
+            // Nếu là trang chủ
+            if (strpos($_SERVER['REQUEST_URI'], 'index.php') && !isset($_GET['pid']) ) {
+              // Nếu story > 24 giờ thì bỏ qua
+              if ($time_diff >= 24 * 60 * 60) {
+                continue;
+              }
+            }
+            
               $story_id = $row_story["story_id"];
               $modal_ids[] = $story_id; // Thêm ID của modal vào mảng
               $file = $row_story["file"];
               echo '<a href="#modal_story_' . $story_id . '"  class="story" style="border:none;padding:0;margin:0 2px">';
               if (strpos($file, '.png') || strpos($file, '.jpg') || strpos($file, '.jpeg')) {
-                echo '<div class="story modal-trigger" style="background-image:url(story/' . $file . ')"></div>';
+                  echo '<div class="story modal-trigger" style="background-image:url(story/' . $file . ')"></div>';
               } else {
-                echo '<video class="story modal-trigger"  muted style="z-index:0;width: 100%;height: 100%;object-fit: cover;">
-                        <source src="story/' . $file . '" type="video/mp4">    
-                      </video>';
+                  echo '<video class="story modal-trigger"  muted style="z-index:0;width: 100%;height: 100%;object-fit: cover;">
+                          <source src="story/' . $file . '" type="video/mp4">    
+                        </video>';
               } 
               
               ?>
@@ -105,8 +111,9 @@
                 </div>
               </div>
 
-            <?php }
-          } ?>
+      <?php 
+          }
+        ?>
           <script>
             var interacted = false;
 

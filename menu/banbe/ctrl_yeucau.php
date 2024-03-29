@@ -3,6 +3,7 @@ session_start();
 $link = new mysqli('localhost', 'root', '', 'MXH');
 $user_id = $_SESSION['user'];
 $m_id=$_POST["user_id"];
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 $time = date("Y-m-d H:i:s");
 
 $sql="INSERT INTO friendrequest (sender_id, receiver_id, status) VALUES ($user_id, $m_id, 'đã gửi')";
