@@ -8,7 +8,6 @@
         <div class="logo"></div>
         <div class="ten_logo font-effect-shadow-multiple">Firefly</div>
     </a>
-    <div class="ba_gach"></div>
     <div class="layout_tim_kiem">
         <form id="timkiem_form" action="index.php?pid=3" enctype="multipart/form-data"method="post">
             <input class="tim_kiem" name="timkiem">

@@ -6,7 +6,7 @@ $share_by = $_POST['share_by'];
 $share_to = $_POST['share_to']; // mảng
 $post_id = $_POST['post_id'];
 $post_by = $_POST['post_by'];
-$url_post = "http://localhost:8080/Social_Media/index.php?pid=10&&post_id=$post_id";
+$url_post = "http://localhost/MXH/index.php?pid=10&&post_id=$post_id";
 $time = date("Y-m-d H:i:s");
 $noti_content = "đã chia sẻ bài viết của bạn.";
 

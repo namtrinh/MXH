@@ -36,8 +36,8 @@ if(isset($_POST["submit"])){
 
             $mail->isHTML(true);                                  
             $mail->Subject = 'Reset your password';
-            $mail->Body    = "Click on this link to reset your password: http://localhost/Social_Media/dangnhap/reset_pass.php?token=$token";
-            $mail->AltBody = "Click on this link to reset your password: http://localhost/Social_Media/dangnhap/reset_pass.php?token=$token";
+            $mail->Body    = "Click on this link to reset your password: http://localhost/MXH/dangnhap/reset_pass.php?token=$token";
+            $mail->AltBody = "Click on this link to reset your password: http://localhost/MXH/dangnhap/reset_pass.php?token=$token";
 
             $mail->send();
             $success_message = 'Hãy check mail để cập nhật lại mật khẩu';

@@ -85,7 +85,7 @@
             <div class="ban_chung"> 
                 <div class="count_ban_chung"> <?php echo $num_mutual_friends?> bạn chung</div>
             </div>
-            <div class="add" onclick="sendFriendRequest(this,<?php echo $row_dx['user_id']?>)">Kết bạn</div>
+            <div class="add" onclick="toggleFriendship(this,<?php echo $row_dx['user_id']?>)">Kết bạn</div>
             <div class="add delete" onclick="deleteFriendRequest(this,<?php echo $row_dx['user_id']?>)">Xóa</div>
         </div>
         <?php 
@@ -141,7 +141,7 @@ function sendFriendRequest(button, userId) {
     });
 }
 
-function cancelFriendRequest1(button, userId) {
+function cancelFriendRequest(button, userId) {
     $.ajax({
         url: 'menu/banbe/ctrl_huy.php',
         type: 'POST',
