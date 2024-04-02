@@ -49,17 +49,17 @@
   <div class="menu_giua" style="width:77%">Lời mời kết bạn
     <div style="margin-left:100px">
       <?php 
-      $link = new mysqli('localhost', 'root', '', 'MXH');
+      require 'dangbaiviet/posts_connect.php';    
       $sql_loimoi="SELECT * FROM user 
       inner JOIN friendrequest ON (friendrequest.receiver_id = $user_id AND friendrequest.sender_id = user.user_id) where status='đã gửi'";
-      $result_lm=$link -> query($sql_loimoi);
+      $result_lm=$conn -> query($sql_loimoi);
       if($result_lm -> num_rows > 0){
         while($row_lm = $result_lm->fetch_assoc()){
           $user_lm=$row_lm["user_id"];
           $sql="SELECT * FROM user 
           LEFT JOIN friendrequest ON (friendrequest.sender_id = $user_lm AND friendrequest.receiver_id = user.user_id) OR (friendrequest.sender_id = user.user_id AND friendrequest.receiver_id = $user_lm)
           WHERE status = 'bạn bè'";
-          $result=$link -> query($sql);
+          $result=$conn -> query($sql);
           $friends_lm=array();
           while($row=$result->fetch_assoc()){
             $friends_lm[] = $row['user_id'];
@@ -67,7 +67,7 @@
         $sql_m="SELECT * FROM user 
         LEFT JOIN friendrequest ON (friendrequest.sender_id = $user_id AND friendrequest.receiver_id = user.user_id) OR (friendrequest.sender_id = user.user_id AND friendrequest.receiver_id = $user_id)
         WHERE status = 'bạn bè'";
-        $result_m=$link -> query($sql_m);
+        $result_m=$conn -> query($sql_m);
         $friends=array();
         while ($row_m = $result_m->fetch_assoc()) {
             $friends[] = $row_m['user_id'];

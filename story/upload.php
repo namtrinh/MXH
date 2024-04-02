@@ -1,5 +1,5 @@
 <?php
-$link = new mysqli('localhost', 'root', '', 'MXH');
+require '../dangbaiviet/posts_connect.php';    
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 if ($_FILES["file"]["size"] > 50000000) {
     echo "Kích thước quá lớn!";
@@ -39,7 +39,7 @@ if ($_FILES["file"]["size"] > 50000000) {
     // Thêm dữ liệu vào cơ sở dữ liệu
     $sql = "INSERT INTO story (user_id, content, file, music, story_time)
     VALUES ($user_id, '$content', '$target_file', '$music_path', '$story_time')";
-    $result = $link->query($sql);
+    $result = $conn->query($sql);
 
     header("location:../index.php");
 }

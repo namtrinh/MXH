@@ -62,11 +62,11 @@ a {
 <div class="formngoai">
   <form action="ctrl_logup.php" method="post">
     <div style="display: flex; justify-content: space-between;">
-      <input type="text" placeholder="Họ" class="formInput" name="ho"/>
-      <input type="text" placeholder="Tên" class="formInput" name="ten"/>
+      <input type="text" placeholder="Họ" class="formInput" name="ho" required>
+      <input type="text" placeholder="Tên" class="formInput" name="ten" required>
     </div>
-    <input type="email" placeholder="Email" class="formInput" name="email"/>
-    <input type="password" placeholder="Mật khẩu" class="formInput" name="pass"/>
+    <input type="email" placeholder="Email" class="formInput" name="email" required>
+    <input type="password" placeholder="Mật khẩu" class="formInput" name="pass" required>
     <div style="display: flex; justify-content: space-between;">
       <select name="ngaysinh" class="formInput">
         <option value="">Ngày</option>

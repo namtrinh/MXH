@@ -1,16 +1,16 @@
 <?php
-$link = new mysqli('localhost', 'root', '', 'MXH');
+require 'dangbaiviet/posts_connect.php';    
 $m_id = $_GET['m_id'];
 $sql_bb="SELECT * FROM user 
 LEFT JOIN friendrequest ON (friendrequest.receiver_id =$m_id AND friendrequest.sender_id = $user_id) OR (friendrequest.sender_id = $m_id and friendrequest.receiver_id = $user_id)
 WHERE user_id= $m_id";
-$result_bb=$link -> query($sql_bb);
+$result_bb=$conn -> query($sql_bb);
 $row_bb = $result_bb->fetch_assoc();
 
 $sql_ss = "SELECT * FROM user
 INNER JOIN friendrequest ON (friendrequest.sender_id = $m_id AND friendrequest.receiver_id = user.user_id) OR (friendrequest.sender_id = user.user_id AND friendrequest.receiver_id = $m_id)
 WHERE status = 'bạn bè'";
-$result_ss = $link->query($sql_ss);
+$result_ss = $conn->query($sql_ss);
 $friends_ss=array();
 while ($row_ss = $result_ss->fetch_assoc()) {
   $friends_ss[] = $row_ss['user_id'];
@@ -307,7 +307,7 @@ while ($row_ss = $result_ss->fetch_assoc()) {
         $sql="SELECT * FROM user 
         INNER JOIN friendrequest ON (friendrequest.sender_id = $user_id AND friendrequest.receiver_id = user.user_id) OR (friendrequest.sender_id = user.user_id AND friendrequest.receiver_id = $user_id)
         WHERE status = 'bạn bè'";
-        $result=$link -> query($sql);
+        $result=$conn -> query($sql);
         $friends=array();
         while ($row = $result->fetch_assoc()) {
           $friends[] = $row['user_id'];
@@ -329,7 +329,7 @@ while ($row_ss = $result_ss->fetch_assoc()) {
                 <?php 
                 foreach ($mutual_friends as $mutual_friends_id) {
                   $sql="SELECT * FROM user where user_id=$mutual_friends_id";
-                  $result = mysqli_query($link, $sql);
+                  $result = mysqli_query($conn, $sql);
                   if (mysqli_num_rows($result) > 0) {
                     while($row = mysqli_fetch_assoc($result)) {
                 ?>
@@ -391,7 +391,7 @@ $sql_buttonOpenModal = "SELECT * FROM posts
         ORDER BY post_id DESC";
 
 
-$result_buttonOpenModal = $link->query($sql_buttonOpenModal);
+$result_buttonOpenModal = $conn->query($sql_buttonOpenModal);
 include 'dangbaiviet/posts_buttonOpenModal.php'
 ?>
 

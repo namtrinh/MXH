@@ -6,7 +6,7 @@
 
 <div class="gop_2_menu" style="top:100px; left:200px">
 <?php 
-$link= new mysqli('localhost','root','','MXH');     
+require 'dangbaiviet/posts_connect.php';    
 $sql_buttonOpenModal="SELECT * FROM posts 
 INNER JOIN user ON posts.post_by = user.user_id
 WHERE posts.post_by != $user_id and (statuss = 'public' AND NOT EXISTS (
@@ -16,7 +16,7 @@ WHERE posts.post_by != $user_id and (statuss = 'public' AND NOT EXISTS (
 ORDER BY post_id DESC";
 
 
-$result_buttonOpenModal=$link -> query($sql_buttonOpenModal);
+$result_buttonOpenModal=$conn -> query($sql_buttonOpenModal);
 
 include 'dangbaiviet/posts_buttonOpenModal.php'
 ?>

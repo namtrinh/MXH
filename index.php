@@ -7,9 +7,9 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 if(isset($_SESSION['user']))
 {
     $user_id = $_SESSION['user'];
-    $ketnoi= new mysqli('localhost','root','','MXH');     
+    require 'dangbaiviet/posts_connect.php';    
     $sql= "SELECT * FROM user WHERE user_id=$user_id";
-    $result= $ketnoi->query($sql);
+    $result= $conn->query($sql);
     $row_id= $result->fetch_assoc();
 
     $showMenuTren = true;

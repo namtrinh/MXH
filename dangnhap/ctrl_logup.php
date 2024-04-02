@@ -1,7 +1,7 @@
 <?php
-$link=new mysqli("localhost","root","","mxh");
-if ($link->connect_error) {
-    die("Connection failed: " . $link->connect_error);
+require '../dangbaiviet/posts_connect.php';    
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 $ho = $_POST['ho'];
 $ten = $_POST['ten'];
@@ -16,7 +16,7 @@ $passMaHoa= md5($pass);
 $username = $ho . ' ' . $ten;
 $ngaysinh = date('Y-m-d', strtotime($namsinh . '-' . $thangsinh . '-' . $ngaysinh));
 $sql_check = "SELECT * FROM user WHERE email = '$email'";
-if ($link->query($sql_check)->num_rows > 0) {
+if ($conn->query($sql_check)->num_rows > 0) {
     echo "
       <script>
           alert('EMAIL ĐÃ TỒN TẠI!');
@@ -27,11 +27,11 @@ if ($link->query($sql_check)->num_rows > 0) {
 } else{
   $sql="INSERT INTO user(username,email,password,date_of_birth,gender) 
   VALUES ('$username','$email','$passMaHoa','$ngaysinh','$gioitinh')";
-  if ($link->query($sql) === TRUE) {
+  if ($conn->query($sql) === TRUE) {
     header("location:dangnhap.php?message=Tạo tài khoản thành công!");
 } else {
-    echo "Thêm dữ liệu thất bại <br>Lỗi: " . $sql . "<br>" . $link->error;
+    echo "Thêm dữ liệu thất bại <br>Lỗi: " . $sql . "<br>" . $conn->error;
 }
 }
-$link->close();
+$conn->close();
 ?>

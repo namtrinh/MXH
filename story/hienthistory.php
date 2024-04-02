@@ -1,5 +1,5 @@
 <?php
-          $result_story = $ketnoi->query($sql_story);
+          $result_story = $conn->query($sql_story);
           // Khởi tạo mảng để lưu trữ ID của các modal
           $modal_ids = array();
           while ($row_story = $result_story->fetch_assoc()) {

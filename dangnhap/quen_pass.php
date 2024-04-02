@@ -8,17 +8,17 @@ $success_message = '';
 $error_message = '';
 
 if(isset($_POST["submit"])){
-    $link = new mysqli('localhost','root','','MXH');
+    require '../dangbaiviet/posts_connect.php';
     $email = $_POST["mail"];
     $sql_mail = "SELECT * FROM user WHERE email='$email'";
-    $result_mail = $link->query($sql_mail);
+    $result_mail = $conn->query($sql_mail);
     if($result_mail->num_rows > 0){
         // Tạo token ngẫu nhiên
         $token = bin2hex(random_bytes(50));
         
         // Lưu token vào cơ sở dữ liệu
         $sql_token = "UPDATE user SET reset_token='$token' WHERE email='$email'";
-        $link->query($sql_token);
+        $conn->query($sql_token);
         
         // Gửi email cho người dùng với token
         $mail = new PHPMailer(true);
@@ -36,8 +36,8 @@ if(isset($_POST["submit"])){
 
             $mail->isHTML(true);                                  
             $mail->Subject = 'Reset your password';
-            $mail->Body    = "Click on this link to reset your password: http://localhost/MXH/dangnhap/reset_pass.php?token=$token";
-            $mail->AltBody = "Click on this link to reset your password: http://localhost/MXH/dangnhap/reset_pass.php?token=$token";
+            $mail->Body    = "Nhấn vào đây để reset mật khẩu của bạn: https://www.firefly.io.vn/dangnhap/reset_pass.php?token=$token";
+            $mail->AltBody = "Nhấn vào đây để reset mật khẩu của bạn: https://www.firefly.io.vn/dangnhap/reset_pass.php?token=$token";
 
             $mail->send();
             $success_message = 'Hãy check mail để cập nhật lại mật khẩu';

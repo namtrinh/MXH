@@ -297,20 +297,33 @@ function createImage(imageUrl, file, imagePreview, imagePreview2, fromDatabase) 
 }
 
 function checkFileSize(input) {
-  var files = input.files;
+    var files = input.files;
 
-  for (var i = 0; i < files.length; i++) {
-    var fileSize = files[i].size;
-    var minSize = 50 * 1024;
-
-    if (fileSize < minSize) {
-      alert('Kích thước của ảnh phải lớn hơn 50kB.');
+    if (input.files.length > 10) {
+      alert('Bạn chỉ có thể chọn tối đa 10 tệp');
       input[typefile].value = '';
       return false;
     }
+    for (var i = 0; i < files.length; i++) {
+      var fileSize = files[i].size;
+      var minSize = 50 * 1024;
+      var maxSize = 100000 * 1024;
+
+      if (fileSize < minSize) {
+        alert('Kích thước của ảnh phải lớn hơn 50kB.');
+        input[typefile].value = '';
+        return false;
+      }
+
+      // Kiểm tra nếu file là video và kích thước lớn hơn maxSize
+      if (files[i].type.match('video.*') && fileSize > maxSize) {
+        alert('Kích thước của video quá lớn!');
+        input[typefile].value = '';
+        return false;
+      }
+    }
+    return true;
   }
-  return true;
-}
 </script>
 
 

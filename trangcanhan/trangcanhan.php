@@ -414,7 +414,7 @@
         $sql_ss = "SELECT * FROM user
         INNER JOIN friendrequest ON (friendrequest.sender_id = $user_id AND friendrequest.receiver_id = user.user_id) OR (friendrequest.sender_id = user.user_id AND friendrequest.receiver_id = $user_id)
         WHERE status = 'bạn bè'";
-        $result_ss = $ketnoi->query($sql_ss);
+        $result_ss = $conn->query($sql_ss);
         $friends_ss = array();
 
         
@@ -513,7 +513,7 @@ $sql_buttonOpenModal = "SELECT * FROM posts
         WHERE  posts.post_by = $user_id
         ORDER BY post_id DESC";
 
-$result_buttonOpenModal = $ketnoi->query($sql_buttonOpenModal);
+$result_buttonOpenModal = $conn->query($sql_buttonOpenModal);
 include 'dangbaiviet/posts_buttonOpenModal.php' ?>
 
 

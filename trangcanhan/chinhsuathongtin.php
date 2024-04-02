@@ -1,6 +1,6 @@
 <?php
 $user_id = $_SESSION['user'];
-$conn = new mysqli("localhost", "root", "", "mxh");
+require 'dangbaiviet/posts_connect.php';
 $sql = "SELECT * FROM user WHERE user_id = $user_id";
 $result = $conn->query($sql);
 

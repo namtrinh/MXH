@@ -71,14 +71,14 @@
 <?php
 
 
-$link = new mysqli('localhost', 'root', '', 'mxh');
+require 'dangbaiviet/posts_connect.php';    
 $sql = "SELECT user.username, user.avartar, posts.post_id, posts.content, posts.image 
 FROM posts 
 JOIN post_function ON posts.post_id = post_function.post_id 
 JOIN user ON posts.post_by = user.user_id 
 WHERE save_by = $user_id";
 
-$result = $link->query($sql);
+$result = $conn->query($sql);
 
 echo "
 <body>

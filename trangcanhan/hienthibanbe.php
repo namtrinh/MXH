@@ -1,5 +1,5 @@
 <?php 
-$result = $link->query($sql);
+$result = $conn->query($sql);
 if (mysqli_num_rows($result) > 0) {
   $friends=array();
   while ($row = $result->fetch_assoc()) {
@@ -9,7 +9,7 @@ if (mysqli_num_rows($result) > 0) {
   foreach ($friends as $friend_id) {
     $sql="SELECT * FROM user LEFT JOIN friendrequest ON (friendrequest.receiver_id =$friend_id AND friendrequest.sender_id = $user_id) OR (friendrequest.sender_id = $friend_id and friendrequest.receiver_id = $user_id)
     WHERE user_id= $friend_id";
-    $result = mysqli_query($link, $sql);
+    $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             $trangthai_ketban = '';

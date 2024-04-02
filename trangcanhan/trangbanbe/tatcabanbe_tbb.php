@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$link= new mysqli('localhost','root','','mxh');
+require '../../dangbaiviet/posts_connect.php';    
 $user_id = $_SESSION['user'];
 $m_id = $_POST['m_id'];
 $sql = "SELECT * FROM user

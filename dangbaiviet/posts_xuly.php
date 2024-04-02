@@ -47,6 +47,7 @@
       padding-left: 10px;
       text-align: left;
       color: #555555;
+      overflow-wrap: break-word;
     }
 
     .fa-paper-plane {

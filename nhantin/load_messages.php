@@ -1,7 +1,7 @@
 <?php 
 session_start();
 $user_id = $_SESSION['user'];
-$ketnoi= new mysqli('localhost','root','','MXH');
+require '../dangbaiviet/posts_connect.php';    
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 function getStatus($is_active, $last_activity) {
     if ($is_active == 1) {
@@ -26,7 +26,7 @@ $friend_default = "SELECT *, MAX(message.timestamp) as latest_timestamp FROM use
 JOIN message ON (message_by = $user_id AND message_to = user_id) OR (message_by = user_id AND message_to = $user_id)
 GROUP BY user_id
 ORDER BY latest_timestamp DESC";
-$result_fr = $ketnoi->query($friend_default);
+$result_fr = $conn->query($friend_default);
 
 
 while ($row_fr = $result_fr->fetch_assoc()) {
@@ -35,7 +35,7 @@ while ($row_fr = $result_fr->fetch_assoc()) {
 
     // lay tin nhan moi nhat
     $sql_latest = "SELECT * FROM message WHERE (message_by=$user_id AND message_to=$friend_id) OR (message_by=$friend_id AND message_to=$user_id) ORDER BY timestamp DESC LIMIT 1";
-    $result_latest = $ketnoi->query($sql_latest);
+    $result_latest = $conn->query($sql_latest);
     if ($result_latest->num_rows > 0) {
         $row_latest = $result_latest->fetch_assoc();
         $latest_content = $row_latest['content'];

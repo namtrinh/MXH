@@ -17,7 +17,7 @@
     <a href="index.php?pid=0"><div class="mess"><i class="fa-brands fa-facebook-messenger"></i>
         <?php 
         $messCount = "SELECT COUNT(*) AS count FROM message WHERE message_to = $user_id AND read_status = 0 ORDER BY message_id DESC";
-        $result_count = $ketnoi->query($messCount);
+        $result_count = $conn->query($messCount);
         $row_count = $result_count->fetch_assoc();
         $messCount = $row_count['count'];
         $class = $messCount > 0 ? '' : 'hidden';
@@ -28,14 +28,14 @@
         <?php 
         if (isset($_GET['update_read_status'])) {
             $updateQuery = "UPDATE notification SET read_status = 1 WHERE noti_to = $user_id";
-            $ketnoi->query($updateQuery);
+            $conn->query($updateQuery);
         }
 
         $thongBaoCount = "SELECT COUNT(*) AS count FROM user 
         INNER JOIN notification ON notification.noti_by = user.user_id and notification.noti_by != $user_id and notification.noti_to = $user_id 
         LEFT JOIN posts ON posts.post_by = $user_id and notification.post_id = posts.post_id
         WHERE read_status = 0 ORDER BY notification_id DESC";
-        $result_count = $ketnoi->query($thongBaoCount);
+        $result_count = $conn->query($thongBaoCount);
         $row_count = $result_count->fetch_assoc();
         $thongBaoCount = $row_count['count'];
         $class = $thongBaoCount > 0 ? '' : 'hidden';
@@ -47,7 +47,7 @@
             INNER JOIN notification ON notification.noti_by = user.user_id and notification.noti_by != $user_id and notification.noti_to = $user_id 
             LEFT JOIN posts ON posts.post_by = $user_id and notification.post_id = posts.post_id
             ORDER BY notification_id DESC";
-            $result_tb = $ketnoi->query($thongBao);
+            $result_tb = $conn->query($thongBao);
             if ($result_tb !== null && $result_tb->num_rows > 0) {
                 while ($row_tb = $result_tb->fetch_assoc()) {
 

@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$link = new mysqli("localhost", "root", "", "mxh");
+require '../dangbaiviet/posts_connect.php';    
 $user_id = $_SESSION['user'];
     $thu_muc="../img/";
     $ten_files_temp=$_FILES["anhbia"]["tmp_name"];
@@ -10,9 +10,9 @@ $user_id = $_SESSION['user'];
     
     $sql="UPDATE user SET cover_picture='$anhbia' WHERE user_id=$user_id";
     
-    if ($link->query($sql) === TRUE) {
+    if ($conn->query($sql) === TRUE) {
         header("location:../index.php?pid=1");
     } else {
-        echo "Cập nhật thất bại! " . $link->error;
+        echo "Cập nhật thất bại! " . $conn->error;
     }
 ?>

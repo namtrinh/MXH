@@ -40,18 +40,18 @@
                 
             }
         }
-        $ketnoi= new mysqli('localhost','root','','MXH');
+        require 'dangbaiviet/posts_connect.php';    
         if (isset($_GET['m_id'])){
             $m_id = $_GET['m_id'];
         }else{
             $friend_default = "SELECT * FROM user 
             left JOIN message on (message_by=$user_id AND message_to=user_id) OR (message_by=user_id AND message_to=$user_id) ORDER BY timestamp DESC";
-            $result_default = $ketnoi->query($friend_default);
+            $result_default = $conn->query($friend_default);
             $row_default = $result_default -> fetch_assoc();
             $m_id = $row_default['user_id'];
         }
         $friend_details = "select * from user where user_id = $m_id";
-        $result_dt = $ketnoi->query($friend_details);
+        $result_dt = $conn->query($friend_details);
         $row_dt = $result_dt ->fetch_assoc();
 
         $status_dt = getStatus($row_dt['is_active'], $row_dt['last_activity']);
@@ -74,7 +74,7 @@
         <div class="content">
             <?php 
             $sql_m = "select * from message where message_by=$user_id and message_to=$m_id or message_by=$m_id and message_to=$user_id";
-            $result = $ketnoi->query($sql_m);
+            $result = $conn->query($sql_m);
             if ($result->num_rows > 0) {
                 
                 while ($row = $result->fetch_assoc()) {
@@ -92,7 +92,7 @@
                             parse_str($urlParts['query'], $queryParts);     // Phân tích chuỗi truy vấn
                             $p_id = $queryParts['post_id'];           // Lấy giá trị của post_id
                             $sql_url="select * from posts inner join user where posts.post_by=user.user_id and post_id=$p_id";
-                            $result_url = $ketnoi->query($sql_url);
+                            $result_url = $conn->query($sql_url);
                             $row=$result_url->fetch_assoc();
                             // Tách thành một mảng
                             $images = explode(",", $row['image']);
@@ -125,7 +125,7 @@
                             parse_str($urlParts['query'], $queryParts);     
                             $p_id = $queryParts['post_id'];           
                             $sql_url="select * from posts inner join user where posts.post_by=user.user_id and post_id=$p_id";
-                            $result_url = $ketnoi->query($sql_url);
+                            $result_url = $conn->query($sql_url);
                             $row=$result_url->fetch_assoc();
                             // Tách thành một mảng
                             $images = explode(",", $row['image']);

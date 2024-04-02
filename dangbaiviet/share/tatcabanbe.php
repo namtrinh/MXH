@@ -1,11 +1,11 @@
 <?php                  
 session_start();
-$ketnoi= new mysqli('localhost','root','','mxh');
+require '../posts_connect.php';    
 $user_id = $_SESSION['user'];
 $sql = "SELECT * FROM user 
 INNER JOIN friendrequest ON (friendrequest.sender_id = $user_id AND friendrequest.receiver_id = user.user_id) OR (friendrequest.sender_id = user.user_id AND friendrequest.receiver_id = $user_id)
 WHERE status='bạn bè'";
-$result = $ketnoi->query($sql);
+$result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
   while($row_ten = $result->fetch_assoc()) {

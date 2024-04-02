@@ -49,28 +49,29 @@
 </style>
 <?php 
 if (isset ($_POST["timkiem"])){
-  $ketnoi=new mysqli("localhost","root","","mxh");
+  require 'dangbaiviet/posts_connect.php';    
   $timkiem=$_POST["timkiem"];
   $sql="SELECT * FROM user WHERE username LIKE '%$timkiem%' and user_id != $user_id";
-  $result=$ketnoi->query($sql);
+  $result=$conn->query($sql);
   
-  if (mysqli_num_rows($result) > 0) {
+  
 ?>
 <body>
 <div class="gop_2_menu">
   <div class="layout_ketqua">
     <div class="mini_layout">
-      <?php while($row=$result->fetch_assoc()){?>
+      <?php 
+      if (mysqli_num_rows($result) > 0) {
+        while($row=$result->fetch_assoc()){?>
         <a href="index.php?pid=2&&m_id=<?php echo $row["user_id"]?>">
           <div class="ketqua">
             <div class="ava_ketqua" style="background-image:url('img/<?php echo $row["avartar"] ?>');"></div>
             <div class="ten_ketqua"><?php echo $row["username"]?>
               <div class="email_ketqua"><?php echo $row["email"]?></div>
             </div>
-            
           </div>
         </a>
-      <?php }}else echo"ko tìm thấy kết quả";?>
+      <?php }}else echo"Không tìm thấy kết quả!";?>
     </div>
   </div>
 </div>

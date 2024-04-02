@@ -3,10 +3,10 @@
     $post_id = $_POST['post_id'];
     $user_id = $_SESSION['user']; 
 
-    $link = new mysqli('localhost', 'root', '', 'mxh');
+    require 'dangbaiviet/posts_connect.php';    
 
     $sql = "DELETE FROM post_function WHERE post_id = $post_id AND save_by = $user_id";
-    $result = $link -> query($sql);
+    $result = $conn -> query($sql);
 
     if ($result) {
         echo "success";

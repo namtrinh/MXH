@@ -1,6 +1,6 @@
 <?php
 date_default_timezone_set('Asia/Ho_Chi_Minh');
-$ketnoi = new mysqli('localhost', 'root', '', 'MXH');
+require '../dangbaiviet/posts_connect.php';    
 $message_by = $_POST['message_by'];
 $message_to = $_POST['message_to'];
 $message_time = date("Y-m-d H:i:s");
@@ -12,7 +12,7 @@ if (isset ($_FILES['file'])) {
     $hinhanh = $_FILES["file"]["name"];
     $sql = "INSERT INTO message (message_to, message_by, content,timestamp) VALUES ('$message_to', '$message_by', '$hinhanh','$message_time')";
 
-    if ($ketnoi->query($sql) === TRUE) {
+    if ($conn->query($sql) === TRUE) {
         echo '
             <div style="width:100%;float:left">
                 <img src="img/' . $hinhanh . '" class="other-image"/>
@@ -23,7 +23,7 @@ if (isset ($_FILES['file'])) {
     $content = $_POST['content'];
     $sql = "INSERT INTO message (message_by, message_to, content,timestamp) VALUES ('$message_by', '$message_to', '$content','$message_time')";
 
-    if ($ketnoi->query($sql) === TRUE) {
+    if ($conn->query($sql) === TRUE) {
         echo "
             <div style='width:100%;float:left'>
                 <div class='text'>" . $content . "

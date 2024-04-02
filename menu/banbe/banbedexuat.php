@@ -49,18 +49,18 @@
     <div class="menu_giua" style="width:77%">Gợi ý kết bạn
         <div style="margin-left:100px">
         <?php 
-        $link= new mysqli('localhost','root','','MXH');     
+        require 'dangbaiviet/posts_connect.php';    
         $dexuat_banbe="SELECT * FROM user 
         LEFT JOIN friendrequest ON (friendrequest.receiver_id = user.user_id AND friendrequest.sender_id = $user_id) 
         OR (friendrequest.receiver_id = $user_id AND friendrequest.sender_id = user.user_id)
         WHERE (receiver_id IS NULL OR sender_id IS NULL) and user.user_id != $user_id";
-        $result_dexuat=$link -> query($dexuat_banbe);
+        $result_dexuat=$conn -> query($dexuat_banbe);
         while($row_dx = $result_dexuat->fetch_assoc()){
             $user_dx=$row_dx["user_id"];
             $sql_ss = "SELECT * FROM user
             LEFT JOIN friendrequest ON (friendrequest.sender_id = $user_dx AND friendrequest.receiver_id = user.user_id) OR (friendrequest.sender_id = user.user_id AND friendrequest.receiver_id = $user_dx)
             WHERE status = 'bạn bè'";
-            $result_ss = $link->query($sql_ss);
+            $result_ss = $conn->query($sql_ss);
             $friends_dx=array();
             while ($row_ss = $result_ss->fetch_assoc()) {
                 $friends_dx[] = $row_ss['user_id'];
@@ -68,7 +68,7 @@
             $sql="SELECT * FROM user 
             LEFT JOIN friendrequest ON (friendrequest.sender_id = $user_id AND friendrequest.receiver_id = user.user_id) OR (friendrequest.sender_id = user.user_id AND friendrequest.receiver_id = $user_id)
             WHERE status = 'bạn bè'";
-            $result=$link -> query($sql);
+            $result=$conn -> query($sql);
             $friends=array();
             while ($row = $result->fetch_assoc()) {
                 $friends[] = $row['user_id'];

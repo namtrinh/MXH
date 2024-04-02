@@ -1,12 +1,16 @@
 <?php     
 session_start();             
-$ketnoi= new mysqli('localhost','root','','mxh');
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+require '../dangbaiviet/posts_connect.php';    
 $timkiem = $_POST["timkiem"];
 $user_id = $_SESSION['user'];
-$sql = "SELECT * FROM user 
+$sql = "SELECT *
+FROM user 
 LEFT JOIN friendrequest ON (friendrequest.sender_id = $user_id AND friendrequest.receiver_id = user.user_id) OR (friendrequest.sender_id = user.user_id AND friendrequest.receiver_id = $user_id)
-WHERE status='bạn bè' AND username LIKE '%$timkiem%'";
-$result1 = $ketnoi->query($sql);
+LEFT JOIN message ON (message_by = $user_id AND message_to = user_id) OR (message_by = user_id AND message_to = $user_id)
+WHERE (status='bạn bè'AND username LIKE '%$timkiem%') OR ((message_by = $user_id OR message_to = $user_id) AND username LIKE '%$timkiem%')
+GROUP BY user_id";
+$result1 = $conn->query($sql);
 
 function getStatus($is_active, $last_activity) {
     if ($is_active == 1) {

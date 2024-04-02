@@ -5,21 +5,21 @@ use PHPMailer\PHPMailer\Exception;
 require '../vendor/autoload.php';
 
 if (isset ($_GET["token"]) && isset ($_POST["password"])) {
-    $link = new mysqli('localhost', 'root', '', 'MXH');
-    if ($link->connect_errno) {
-        echo "Failed to connect to MySQL: " . $link->connect_error;
+    require '../dangbaiviet/posts_connect.php';    
+    if ($conn->connect_errno) {
+        echo "Failed to connect to MySQL: " . $conn->connect_error;
         exit();
     }
-    $token = $link->real_escape_string($_GET["token"]);
-    $password = $link->real_escape_string(md5($_POST["password"]));
+    $token = $conn->real_escape_string($_GET["token"]);
+    $password = $conn->real_escape_string(md5($_POST["password"]));
     $sql_user = "SELECT * FROM user WHERE reset_token='$token'";
-    $result_user = $link->query($sql_user);
+    $result_user = $conn->query($sql_user);
     if ($result_user !== false && $result_user->num_rows > 0) {
         $user = $result_user->fetch_assoc();
         $email = $user['email'];
 
         $sql_update = "UPDATE user SET password='$password' WHERE email='$email' and reset_token='$token'";
-        $result_update = $link->query($sql_update);
+        $result_update = $conn->query($sql_update);
         if ($result_update) {
             echo "<script>
                     alert('Đổi mật khẩu thành công');

@@ -1,12 +1,12 @@
 <?php                  
-$ketnoi= new mysqli('localhost','root','','mxh');
+require '../posts_connect.php';    
 $timkiem = $_POST["timkiem"];
 $post_id = $_POST['post_id'];
 $user_id = $_POST['user_id'];
 $sql = "SELECT * FROM user 
 LEFT JOIN friendrequest ON (friendrequest.sender_id = $user_id AND friendrequest.receiver_id = user.user_id) OR (friendrequest.sender_id = user.user_id AND friendrequest.receiver_id = $user_id)
 WHERE status='bạn bè' AND username LIKE '%$timkiem%'";
-$result = $ketnoi->query($sql);
+$result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
   while($row_ten = $result->fetch_assoc()) {

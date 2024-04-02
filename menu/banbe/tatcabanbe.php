@@ -41,11 +41,11 @@
 }
 </style>
 <?php 
-$link = new mysqli('localhost', 'root', '', 'MXH');
+require 'dangbaiviet/posts_connect.php';    
 $sql="SELECT * FROM user 
 LEFT JOIN friendrequest ON (friendrequest.sender_id = $user_id AND friendrequest.receiver_id = user.user_id) OR (friendrequest.sender_id = user.user_id AND friendrequest.receiver_id = $user_id)
 WHERE status = 'bạn bè'";
-$result=$link -> query($sql);
+$result=$conn -> query($sql);
 if($result -> num_rows > 0){
 ?>
 
