@@ -22,9 +22,6 @@ INSERT INTO user(username, password, email, gender, date_of_birth, avartar, cove
 ('Nam Phương', MD5('12345'), 'nam@gmail.com', 'Nam', '2004-07-02', 'user.jpeg', 'anhbia.jpg', null),
 ('Kiet', MD5('12345'), 'kietanh@gmail.com', 'Nam', '2002-07-15', 'user.jpeg', 'anhbia.jpg', 'toi la Kiet');
 
-
-
-
 CREATE TABLE posts (
   post_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   post_by int,
